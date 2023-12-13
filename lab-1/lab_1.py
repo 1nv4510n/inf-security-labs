@@ -1,6 +1,7 @@
 # Шифр Цезаря, Савин Богдан ПИ(ю)-41
 # русский, английский алфавит в нижнем регистре и пробел
 BASE_ALPHABET = 'abcdefghijklmnopqrstuvwxyzабвгдеёжзийклмнопрстуфхцчшщъыьэюя '
+SHIFT_DEFAULT = -3
 
 def shift_symbol(symbol: str, shift: int) -> str:
     num = BASE_ALPHABET.find(symbol)
@@ -13,20 +14,16 @@ def shift_symbol(symbol: str, shift: int) -> str:
 
 if __name__ == '__main__':
     print('Шифр Цезаря для русского и английского алфавитов + пробел')
-    n = input('Выберите сдвиг (по умолчанию -3): ')
-    if n == "": n = -3 
-    n = int(n)
+    n = int(input('Выберите сдвиг (по умолчанию -3): ') or SHIFT_DEFAULT)
     input_text = input('Введите сообщение: ')
     
-    print(f'Исходный текст: {input_text}')
+    print(f'\nИсходный текст: {input_text}')
     print(f'Сдвиг: {n}\n')
     encrypted_text = ''
-    # ENCRYPT
     for symbol in input_text:
         encrypted_text += shift_symbol(symbol, n)
     print(f'Зашифрованный текст: {encrypted_text}\n')
-
-    # DECRYPT
+    
     decrypted_text = ''
     for symbol in encrypted_text:
         decrypted_text += shift_symbol(symbol, -n)
